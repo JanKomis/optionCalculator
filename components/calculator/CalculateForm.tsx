@@ -13,9 +13,16 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
+const items = [
+  { name: "spotPrice", label: "Spot Price" },
+  { name: "strikePrice", label: "Strike Price" },
+  { name: "testPrice", label: "Test Price" },
+];
+
 const formSchema = z.object({
   spotPrice: z.coerce.number(),
   strikePrice: z.coerce.number(),
+  testPrice: z.coerce.number(),
 });
 
 export default function CalculateForm() {
@@ -24,6 +31,7 @@ export default function CalculateForm() {
     defaultValues: {
       spotPrice: 0,
       strikePrice: 0,
+      testPrice: 0,
     },
   });
 
@@ -32,42 +40,28 @@ export default function CalculateForm() {
   };
 
   return (
-    <main
-      className="flex min-h-screen flex-col items-center justify-between p-24"
-      suppressHydrationWarning={true}
-    >
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleSubmit)}
           className="max-w-md w-full flex flex-col gap-4"
         >
-          <FormField
-            control={form.control}
-            name="spotPrice"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Spot price</FormLabel>
-                <FormControl>
-                  <Input placeholder="Spot price" type="number" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="strikePrice"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Strike price</FormLabel>
-                <FormControl>
-                  <Input placeholder="Strike price" type="number" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          {items.map((item, index) => (
+            <FormField
+              key={item.name}
+              control={form.control}
+              name={item.name}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{item.label}</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Spot price" type="number" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          ))}
 
           <Button type="submit" className="w-full">
             Submit
