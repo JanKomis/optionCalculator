@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 
 import { calculateCallOption } from "@/lib/optionsCalc";
 
-const items = [
+const items2 = [
   {
     name: "spotPrice",
     label: "Spot Price",
@@ -52,6 +52,46 @@ const items = [
     label: "Divident",
     schema: z.coerce.number(),
     default: 0,
+  },
+];
+
+const items = [
+  {
+    name: "spotPrice",
+    label: "Spot Price",
+    schema: z.coerce.number(),
+    default: 142.27,
+  },
+  {
+    name: "strikePrice",
+    label: "Strike Price",
+    schema: z.coerce.number(),
+    default: 142,
+  },
+  {
+    name: "strikeInterval",
+    label: "Strike Interval",
+    schema: z.coerce.number(),
+    default: 1,
+  },
+  { name: "days", label: "Days", schema: z.coerce.number(), default: 25 },
+  {
+    name: "volatility",
+    label: "Volatility",
+    schema: z.coerce.number(),
+    default: 22.69,
+  },
+  {
+    name: "interestRate",
+    label: "Interest rate",
+    schema: z.coerce.number(),
+    default: 1.75,
+  },
+  {
+    name: "divident",
+    label: "Divident",
+    schema: z.coerce.number(),
+    default: 1.6,
   },
 ];
 

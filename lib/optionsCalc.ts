@@ -53,10 +53,10 @@ export function calculateCallOption({
   volatility,
   days,
 }: OptionParameters): number {
-  const d1 = calculateD1(spot, strike, intRate, divident, volatility, days);
-  const d2 = calculateD2(d1, volatility, days);
+  const d1 = calculateD1(spot, strike, (intRate/100), (divident/100), (volatility/100), days);
+  const d2 = calculateD2(d1, (volatility/100), days);
   const callOption =
-    spot * Math.exp(-divident * (days / 365)) * calculateNormalD(d1) -
-    strike * Math.exp(-intRate * (days / 365)) * calculateNormalD(d2);
+    spot * Math.exp(-(divident/100) * (days / 365)) * calculateNormalD(d1) -
+    strike * Math.exp(-(intRate/100) * (days / 365)) * calculateNormalD(d2);
   return parseFloat(callOption.toFixed(4));
 }
