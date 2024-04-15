@@ -60,7 +60,7 @@ const formSchema = z.object(
   }, {})
 );
 
-const defaultValues2 = items.reduce((final, item) => {
+const defaultValues = items.reduce((final, item) => {
   final[item.name] = item.default;
   return final;
 }, {});
@@ -68,7 +68,7 @@ const defaultValues2 = items.reduce((final, item) => {
 export default function CalculateForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: { ...defaultValues2 },
+    defaultValues: { ...defaultValues },
   });
 
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
