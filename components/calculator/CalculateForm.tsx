@@ -19,18 +19,10 @@ const items = [
   { name: "testPrice", label: "Test Price", schema: z.coerce.number() },
 ];
 
-const formSchema2 = z.object({
-  spotPrice: z.coerce.number(),
-  strikePrice: z.coerce.number(),
-  testPrice: z.coerce.number(),
-});
-
 const formSchema = z.object(items.reduce((final, item) => {
   final[item.name] = item.schema;
   return final;
 }, {}));
-
-//console.log(<z.infer<typeof formSchema>>)
 
 export default function CalculateForm() {
   const form = useForm<z.infer<typeof formSchema>>({
