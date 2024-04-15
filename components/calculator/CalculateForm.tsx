@@ -75,6 +75,18 @@ export default function CalculateForm() {
 
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
     console.log({ values });
+
+    const optionParams = {
+      spot: values.spotPrice,
+      days: values.days,
+      strike: values.strikePrice,
+      intRate: values.interestRate,
+      divident: values.divident,
+      volatility: values.volatility,
+    };
+
+    const result = calculateCallOption(optionParams);
+    console.log("Cena call opce je:", result);
   };
 
   return (
@@ -110,4 +122,4 @@ export default function CalculateForm() {
   );
 }
 
-console.log(calculateCallOption(142.27, 141, 0.0175, 0.016, 0.2269, 25));
+//console.log(calculateCallOption(142.27, 142, 0.0175, 0.016, 0.2269, 25));

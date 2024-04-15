@@ -35,15 +35,24 @@ function calculateD2(d1: number, volatility: number, days: number): number {
   return d1 - volatility * Math.sqrt(days / 365);
 }
 
+interface OptionParameters {
+  spot: number;
+  strike: number;
+  intRate: number; // Interest rate
+  divident: number; // Dividend yield
+  volatility: number;
+  days: number;
+}
+
 // Function for calculate call option
-export function calculateCallOption(
-  spot: number,
-  strike: number,
-  intRate: number,
-  divident: number,
-  volatility: number,
-  days: number
-): number {
+export function calculateCallOption({
+  spot,
+  strike,
+  intRate,
+  divident,
+  volatility,
+  days,
+}: OptionParameters): number {
   const d1 = calculateD1(spot, strike, intRate, divident, volatility, days);
   const d2 = calculateD2(d1, volatility, days);
   const callOption =
