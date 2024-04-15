@@ -58,5 +58,5 @@ export function calculateCallOption({
   const callOption =
     spot * Math.exp(-(divident/100) * (days / 365)) * calculateNormalD(d1) -
     strike * Math.exp(-(intRate/100) * (days / 365)) * calculateNormalD(d2);
-  return parseFloat(callOption.toFixed(4));
+  return parseFloat(callOption.toFixed(10));
 }

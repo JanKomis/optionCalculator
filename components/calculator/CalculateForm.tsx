@@ -19,38 +19,55 @@ const items2 = [
   {
     name: "spotPrice",
     label: "Spot Price",
-    schema: z.coerce.number(),
+    schema: z.coerce
+      .number()
+      .min(0, { message: "The minimum spot price must be 0 USD." }),
     default: 0,
   },
   {
     name: "strikePrice",
     label: "Strike Price",
-    schema: z.coerce.number(),
+    schema: z.coerce
+      .number()
+      .min(0.1, { message: "The minimum strike must be 0.1 USD." }),
     default: 0,
   },
   {
     name: "strikeInterval",
     label: "Strike Interval",
-    schema: z.coerce.number(),
+    schema: z.coerce
+      .number()
+      .min(0.1, { message: "The minimum strike interval must be 0.1 USD." }),
     default: 1,
   },
-  { name: "days", label: "Days", schema: z.coerce.number(), default: 1 },
+  {
+    name: "days",
+    label: "Days",
+    schema: z.coerce.number().min(0, { message: "The minimum days must be 0." }),
+    default: 1,
+  },
   {
     name: "volatility",
     label: "Volatility",
-    schema: z.coerce.number(),
+    schema: z.coerce
+      .number()
+      .min(0, { message: "The volatility must be zero or positive." }),
     default: 10,
   },
   {
     name: "interestRate",
     label: "Interest rate",
-    schema: z.coerce.number(),
+    schema: z.coerce
+      .number()
+      .min(0, { message: "The interest rate must be zero or positive." }),
     default: 1,
   },
   {
     name: "divident",
     label: "Divident",
-    schema: z.coerce.number(),
+    schema: z.coerce
+      .number()
+      .min(0, { message: "The divident must be zero or positive." }),
     default: 0,
   },
 ];
@@ -59,38 +76,57 @@ const items = [
   {
     name: "spotPrice",
     label: "Spot Price",
-    schema: z.coerce.number(),
+    schema: z.coerce
+      .number()
+      .min(0, { message: "The minimum spot price must be 0 USD." }),
     default: 142.27,
   },
   {
     name: "strikePrice",
     label: "Strike Price",
-    schema: z.coerce.number(),
+    schema: z.coerce
+      .number()
+      .min(0.1, { message: "The minimum strike must be 0.1 USD." }),
     default: 142,
   },
   {
     name: "strikeInterval",
     label: "Strike Interval",
-    schema: z.coerce.number(),
+    schema: z.coerce
+      .number()
+      .min(0.1, { message: "The minimum strike interval must be 0.1 USD." }),
     default: 1,
   },
-  { name: "days", label: "Days", schema: z.coerce.number(), default: 25 },
+  {
+    name: "days",
+    label: "Days",
+    schema: z.coerce
+      .number()
+      .min(0, { message: "The minimum days must be 0." }),
+    default: 25,
+  },
   {
     name: "volatility",
     label: "Volatility",
-    schema: z.coerce.number(),
+    schema: z.coerce
+      .number()
+      .min(0, { message: "The volatility must be zero or positive." }),
     default: 22.69,
   },
   {
     name: "interestRate",
     label: "Interest rate",
-    schema: z.coerce.number(),
+    schema: z.coerce
+      .number()
+      .min(0, { message: "The interest rate must be zero or positive." }),
     default: 1.75,
   },
   {
     name: "divident",
     label: "Divident",
-    schema: z.coerce.number(),
+    schema: z.coerce
+      .number()
+      .min(0, { message: "The divident must be zero or positive." }),
     default: 1.6,
   },
 ];
