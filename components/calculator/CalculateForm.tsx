@@ -14,16 +14,23 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 const items = [
-  { name: "spotPrice", label: "Spot Price" },
-  { name: "strikePrice", label: "Strike Price" },
-  { name: "testPrice", label: "Test Price" },
+  { name: "spotPrice", label: "Spot Price", schema: z.coerce.number() },
+  { name: "strikePrice", label: "Strike Price", schema: z.coerce.number() },
+  { name: "testPrice", label: "Test Price", schema: z.coerce.number() },
 ];
 
-const formSchema = z.object({
+const formSchema2 = z.object({
   spotPrice: z.coerce.number(),
   strikePrice: z.coerce.number(),
   testPrice: z.coerce.number(),
 });
+
+const formSchema = z.object(items.reduce((final, item) => {
+  final[item.name] = item.schema;
+  return final;
+}, {}));
+
+//console.log(<z.infer<typeof formSchema>>)
 
 export default function CalculateForm() {
   const form = useForm<z.infer<typeof formSchema>>({
@@ -46,7 +53,7 @@ export default function CalculateForm() {
           onSubmit={form.handleSubmit(handleSubmit)}
           className="max-w-md w-full flex flex-col gap-4"
         >
-          {items.map((item, index) => (
+          {items.map((item) => (
             <FormField
               key={item.name}
               control={form.control}
