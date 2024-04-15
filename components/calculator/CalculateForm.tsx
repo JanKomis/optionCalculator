@@ -13,6 +13,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
+import { calculateCallOption } from "@/lib/optionsCalc";
+
 const items = [
   {
     name: "spotPrice",
@@ -32,7 +34,7 @@ const items = [
     schema: z.coerce.number(),
     default: 1,
   },
-  { name: "days", label: "Days", schema: z.coerce.number(), default: 1,},
+  { name: "days", label: "Days", schema: z.coerce.number(), default: 1 },
   {
     name: "volatility",
     label: "Volatility",
@@ -107,3 +109,5 @@ export default function CalculateForm() {
     </main>
   );
 }
+
+console.log(calculateCallOption(142.27, 141, 0.0175, 0.016, 0.2269, 25));
