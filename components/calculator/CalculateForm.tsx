@@ -14,24 +14,61 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 const items = [
-  { name: "spotPrice", label: "Spot Price", schema: z.coerce.number() },
-  { name: "strikePrice", label: "Strike Price", schema: z.coerce.number() },
-  { name: "testPrice", label: "Test Price", schema: z.coerce.number() },
+  {
+    name: "spotPrice",
+    label: "Spot Price",
+    schema: z.coerce.number(),
+    default: 0,
+  },
+  {
+    name: "strikePrice",
+    label: "Strike Price",
+    schema: z.coerce.number(),
+    default: 0,
+  },
+  {
+    name: "strikeInterval",
+    label: "Strike Interval",
+    schema: z.coerce.number(),
+    default: 1,
+  },
+  { name: "days", label: "Days", schema: z.coerce.number(), default: 1,},
+  {
+    name: "volatility",
+    label: "Volatility",
+    schema: z.coerce.number(),
+    default: 10,
+  },
+  {
+    name: "interestRate",
+    label: "Interest rate",
+    schema: z.coerce.number(),
+    default: 1,
+  },
+  {
+    name: "divident",
+    label: "Divident",
+    schema: z.coerce.number(),
+    default: 0,
+  },
 ];
 
-const formSchema = z.object(items.reduce((final, item) => {
-  final[item.name] = item.schema;
+const formSchema = z.object(
+  items.reduce((final, item) => {
+    final[item.name] = item.schema;
+    return final;
+  }, {})
+);
+
+const defaultValues2 = items.reduce((final, item) => {
+  final[item.name] = item.default;
   return final;
-}, {}));
+}, {});
 
 export default function CalculateForm() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      spotPrice: 0,
-      strikePrice: 0,
-      testPrice: 0,
-    },
+    defaultValues: { ...defaultValues2 },
   });
 
   const handleSubmit = (values: z.infer<typeof formSchema>) => {
@@ -54,7 +91,7 @@ export default function CalculateForm() {
                 <FormItem>
                   <FormLabel>{item.label}</FormLabel>
                   <FormControl>
-                    <Input placeholder="Spot price" type="number" {...field} />
+                    <Input placeholder={item.label} type="number" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
