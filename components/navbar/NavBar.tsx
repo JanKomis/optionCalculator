@@ -1,6 +1,7 @@
-import { Heading1 } from "lucide-react";
 import Link from "next/link";
 import React from "react";
+import { UserNav } from "./UserNav";
+import { Separator } from "@radix-ui/react-separator";
 
 const links = [
   {
@@ -39,7 +40,7 @@ export default function NavBar() {
               </Link>
             ))}
           </nav>
-          <div>User</div>
+          <UserNav></UserNav>
         </>
       ) : (
         <Link
