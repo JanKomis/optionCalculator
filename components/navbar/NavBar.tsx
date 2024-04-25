@@ -1,7 +1,10 @@
 import Link from "next/link";
 import React from "react";
 import { UserNav } from "./UserNav";
-import { Separator } from "@radix-ui/react-separator";
+import { auth } from "@/auth";
+import { SignIn } from "./SignIn";
+import { SignOut } from "./SignOut";
+
 
 const links = [
   {
@@ -18,16 +21,16 @@ const links = [
   },
 ];
 
-const login = true;
+export default async function NavBar() {
+  const session = await auth()
 
-export default function NavBar() {
   return (
     <div
       className={`flex h-16 items-center px-4 ${
-        login ? "justify-between" : "justify-end"
+        session ? "justify-between" : "justify-end"
       }`}
     >
-      {login ? (
+      {session ? (
         <>
           <nav className="space-x-4">
             {links.map((link) => (
@@ -43,12 +46,7 @@ export default function NavBar() {
           <UserNav></UserNav>
         </>
       ) : (
-        <Link
-          href={"/login"}
-          className="text-sm font-medium transition-colors hover:text-primary"
-        >
-          Log in
-        </Link>
+        <SignIn/>
       )}
     </div>
   );
