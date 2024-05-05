@@ -1,8 +1,9 @@
-import Link from "next/link";
 import React from "react";
 import { UserNav } from "./UserNav";
 import { auth } from "@/auth";
 import { SignIn } from "./SignIn";
+import NavLinks from "./NavLinks";
+import clsx from "clsx";
 
 
 
@@ -26,23 +27,14 @@ export default async function NavBar() {
 
   return (
     <div
-      className={`flex h-16 items-center px-4 ${
-        session ? "justify-between" : "justify-end"
-      }`}
+      className={clsx('flex h-16 items-center px-4', {
+        'justify-between': session,
+        'justify-end': !session,
+    })}
     >
       {session ? (
         <>
-          <nav className="space-x-4">
-            {links.map((link) => (
-              <Link
-                key={link.name}
-                href={link.path}
-                className="text-sm font-medium transition-colors hover:text-primary"
-              >
-                {link.name}
-              </Link>
-            ))}
-          </nav>
+          <NavLinks></NavLinks>
           <UserNav></UserNav>
         </>
       ) : (
