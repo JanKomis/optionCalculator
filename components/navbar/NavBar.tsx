@@ -4,8 +4,7 @@ import { auth } from "@/auth";
 import { SignIn } from "./SignIn";
 import NavLinks from "./NavLinks";
 import clsx from "clsx";
-
-
+import { SessionProvider } from "next-auth/react";
 
 const links = [
   {
@@ -23,14 +22,14 @@ const links = [
 ];
 
 export default async function NavBar() {
-  const session = await auth()
+  const session = await auth();
 
   return (
     <div
-      className={clsx('flex h-16 items-center px-4', {
-        'justify-between': session,
-        'justify-end': !session,
-    })}
+      className={clsx("flex h-16 items-center px-4", {
+        "justify-between": session,
+        "justify-end": !session,
+      })}
     >
       {session ? (
         <>
@@ -38,7 +37,7 @@ export default async function NavBar() {
           <UserNav></UserNav>
         </>
       ) : (
-        <SignIn/>
+        <SignIn />
       )}
     </div>
   );

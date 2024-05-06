@@ -19,7 +19,8 @@ const links = [
 ];
 
 export default function NavLinks() {
-  const pathname = usePathname();
+  const pathName = usePathname();
+
   return (
     <nav className="space-x-1">
       {links.map((link) => (
@@ -29,7 +30,7 @@ export default function NavLinks() {
           //className="text-sm font-medium transition-colors hover:text-primary bg-red-500"
           className={clsx(
             "text-sm font-medium text-primary hover:bg-accent py-2 px-4 rounded-full",
-            { "bg-accent": pathname === link.path }
+            { "bg-accent": pathName === link.path }
           )}
         >
           {link.name}
