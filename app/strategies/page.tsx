@@ -1,3 +1,10 @@
+import StrategiesTable from "@/components/strategies/StrategiesTable";
+
+
 export default function Page() {
-    return <main>Welcome to page!</main>;
-  }
+  return (
+    <main>
+      <StrategiesTable></StrategiesTable>
+    </main>
+  );
+}
