@@ -75,77 +75,65 @@ enum OptionType {
   PUT
 }
 
+enum Trade {
+  OPEN
+  CLOSED
+}
+
 enum UnderAssetType {
   STOCK
 }
 
 model Strategy {
-  id              String            @id @default(cuid())
-  userId          String            @map("user_id")
-  title           String
-  description     String?
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
-  user            User              @relation(fields: [userId], references: [id], onDelete: Cascade)
-  openPositions   OpenPositions[]
-  closedPositions ClosedPositions[]
-  fees            Float?
+  id           String       @id @default(cuid())
+  strategySlug String       @unique
+  userId       String       @map("user_id")
+  title        String
+  description  String?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  options      Option[]
+  underAssets  UnderAsset[]
+  fees         Float?
 
   @@map("strategies")
 }
 
-model OpenPositions {
-  id         String       @id @default(cuid())
-  options    Option[]
-  underAsset UnderAsset[]
-  strategyId String       @unique
-  strategy   Strategy     @relation(fields: [strategyId], references: [id], onDelete: Cascade)
-}
-
-model ClosedPositions {
-  id         String       @id @default(cuid())
-  options    Option[]
-  underAsset UnderAsset[]
-  strategyId String       @unique
-  strategy   Strategy     @relation(fields: [strategyId], references: [id], onDelete: Cascade)
-}
-
 model Option {
-  id                String           @id @default(cuid())
-  type              OptionType
-  position          Position
-  underAssetName    String?
-  spotPrice         Float
-  strikePrice       Float
-  expirationDate    DateTime
-  volatility        Float
-  interestRate      Float
-  divident          Float?
-  strikeInterval    Float
-  executionPrice    Float?
-  createdAt         DateTime         @default(now())
-  updatedAt         DateTime         @updatedAt
-  openPositionsId   String?
-  closedPositionsId String?
-  openPositions     OpenPositions?   @relation(fields: [openPositionsId], references: [id], onDelete: Cascade)
-  closedPositions   ClosedPositions? @relation(fields: [closedPositionsId], references: [id], onDelete: Cascade)
+  id             String     @id @default(cuid())
+  optionSlug     String     @unique
+  type           OptionType
+  position       Position
+  trade          Trade
+  strategyId     String
+  spotPrice      Float
+  strikePrice    Float
+  expirationDate DateTime
+  volatility     Float
+  interestRate   Float
+  divident       Float?
+  strikeInterval Float
+  openPrice      Float
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  strategy       Strategy   @relation(fields: [strategyId], references: [id], onDelete: Cascade)
 
   @@map("options")
 }
 
 model UnderAsset {
-  id                String           @id @default(cuid())
-  createdAt         DateTime         @default(now())
-  updatedAt         DateTime         @updatedAt
-  type              UnderAssetType
-  openPrice         Float
-  closePrice        Float?
-  position          Position
-  name              String?
-  openPositionsId   String?
-  openPositions     OpenPositions?   @relation(fields: [openPositionsId], references: [id], onDelete: Cascade)
-  closedPositionsId String?
-  closedPositions   ClosedPositions? @relation(fields: [closedPositionsId], references: [id], onDelete: Cascade)
+  id             String         @id @default(cuid())
+  underAssetSlug String         @unique
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  type           UnderAssetType
+  openPrice      Float
+  closePrice     Float?
+  position       Position
+  trade          Trade
+  strategyId     String
+  strategy       Strategy       @relation(fields: [strategyId], references: [id], onDelete: Cascade)
 
   @@map("underAssets")
 }
