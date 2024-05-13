@@ -1,6 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
+import DataTableRowActions from "./DataTableRowActions";
 
 export type StrategyRow = {
   id: string;
@@ -18,5 +19,9 @@ export const columns: ColumnDef<StrategyRow>[] = [
   {
     accessorKey: "updatedAt",
     header: "Update at",
+  },
+  {
+    id: "actions",
+    cell: ({ row }) => <DataTableRowActions row={row} />,
   },
 ];
