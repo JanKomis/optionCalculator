@@ -1,10 +1,13 @@
-import StrategiesTable from "@/components/strategies/StrategiesTable";
+import { columns } from "@/components/strategies/Columns";
+import { DataTable } from "@/components/strategies/DataTable";
+import { getAllStrategies } from "@/lib/data";
 
+export default async function Page() {
+  const data = await getAllStrategies();
 
-export default function Page() {
   return (
     <main>
-      <StrategiesTable></StrategiesTable>
+      <DataTable columns={columns} data={data} />
     </main>
   );
 }
