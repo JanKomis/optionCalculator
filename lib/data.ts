@@ -1,4 +1,4 @@
-import prisma from './db'
+import prisma from "./db";
 
 export async function getAllStrategies() {
   try {
@@ -8,9 +8,22 @@ export async function getAllStrategies() {
         closedPositions: true,
       },
     });
-    console.log(strategies);
     return strategies;
   } catch (error) {
     console.error("Error fetching strategies:", error);
+  }
+}
+
+export async function getStrategyById(strategyId) {
+  try {
+    const strategy = await prisma.strategy.findUnique({
+      where: {
+        id: strategyId,
+      },
+    });
+
+    return strategy;
+  } catch (error) {
+    console.error("Error retrieving strategy: ", error);
   }
 }
