@@ -112,7 +112,7 @@ model Option {
   expirationDate DateTime
   volatility     Float
   interestRate   Float
-  divident       Float?
+  dividend       Float      @default(0)
   strikeInterval Float
   openPrice      Float
   createdAt      DateTime   @default(now())

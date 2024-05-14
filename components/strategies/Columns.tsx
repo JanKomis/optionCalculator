@@ -2,14 +2,9 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import DataTableRowActions from "./DataTableRowActions";
+import { StrategyRow } from "@/lib/types";
 
-export type StrategyRow = {
-  id: string;
-  title: string;
-  updatedAt: string;
-};
 
-//id: string;
 
 export const columns: ColumnDef<StrategyRow>[] = [
   {

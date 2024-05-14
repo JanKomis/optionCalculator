@@ -1,16 +1,16 @@
-export default function Strategy() {
+import { getStrategyBySlug } from "@/lib/data";
+
+export default async function Strategy({ params }) {
+  const strategy = await getStrategyBySlug(params.strategySlug);
+  console.log(strategy);
   return (
     <>
       <header>
-        <h1>Ahoj</h1>
+        <h1>{strategy.title}</h1>
+        <p>{strategy.description}</p>
       </header>
       <main>
-        <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nesciunt
-          modi ducimus tempore quasi quo vero nam quidem dolores, beatae
-          tempora, soluta, necessitatibus obcaecati temporibus dolorem maiores
-          molestiae libero autem iusto?
-        </p>
+        <DataTable columns={columns} data={data} />
       </main>
     </>
   );

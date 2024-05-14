@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "options" ADD COLUMN     "dividend" DOUBLE PRECISION NOT NULL DEFAULT 0;
