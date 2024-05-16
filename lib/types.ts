@@ -4,39 +4,44 @@ export type Position = "Long" | "Short";
 
 export type OptionType = "Call" | "Put";
 
-export type InputOptionParams = {
-  position: Position;
-  spotPrice: Number;
-  strikePrice: Number;
-  expirationDate: String;
-  volatility: Number;
-  interestRate: Number;
-  dividend: Number;
-  strikeInterval: Number;
+export type OptionModel = "Black_Scholes";
+
+export type inputOptionParams = {
+  type: OptionType;
+  model: OptionModel;
+  spotPrice: number;
+  strikePrice: number;
+  expiration: number;
+  volatility: number;
+  interestRate: number;
+  dividend: number;
+  strikeInterval: number;
 };
 
-export type queryOptionData = InputOptionParams & {
+
+export type queryOptionData = inputOptionParams & {
   id: string;
   optionSlug: string;
   updatedAt: string;
   trade: TradeType;
-  optionType: OptionType;
-  openPrice: Number;
+  position: Position;
+  openPrice: number;
 };
+
 
 export type calcOptionParams = {
-  grDelta: Number;
-  grGama: Number;
-  grTheta: Number;
-  grVega: Number;
-  optionPrice: Number;
+  optionPrice: number;
+  grDelta: number;
+  grGama: number;
+  grTheta: number;
+  grVega: number;
+  grRho: number;
 };
 
-export type Option = queryOptionData & calcOptionParams;
-
+export type option = queryOptionData & calcOptionParams;
 
 export type StrategyRow = {
-    id: string;
-    title: string;
-    updatedAt: string;
-  };
+  strategySlug: string;
+  title: string;
+  updatedAt: string;
+};

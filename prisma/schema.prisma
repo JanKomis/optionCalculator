@@ -66,22 +66,26 @@ model VerificationToken {
 }
 
 enum Position {
-  LONG
-  SHORT
+  Long
+  Short
 }
 
 enum OptionType {
-  CALL
-  PUT
+  Call
+  Put
 }
 
 enum Trade {
-  OPEN
-  CLOSED
+  Open
+  Closed
+}
+
+enum Model {
+  Black_Scholes
 }
 
 enum UnderAssetType {
-  STOCK
+  Stock
 }
 
 model Strategy {
@@ -106,13 +110,14 @@ model Option {
   type           OptionType
   position       Position
   trade          Trade
+  model          Model      @default(Black_Scholes)
   strategyId     String
   spotPrice      Float
   strikePrice    Float
-  expirationDate DateTime
+  expiration     Int
   volatility     Float
   interestRate   Float
-  dividend       Float      @default(0)
+  dividend       Float      @default(0)     
   strikeInterval Float
   openPrice      Float
   createdAt      DateTime   @default(now())

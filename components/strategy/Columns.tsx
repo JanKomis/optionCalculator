@@ -20,8 +20,8 @@ export const columns: ColumnDef<Option>[] = [
     header: "Strike Price",
   },
   {
-    accessorKey: "expirationDate",
-    header: "Exp. Date",
+    accessorKey: "expiration",
+    header: "Expiration",
   },
   {
     accessorKey: "volatility",
